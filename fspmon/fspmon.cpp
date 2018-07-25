@@ -281,7 +281,7 @@ CONST FLT_REGISTRATION FilterRegistration = {
     FLT_REGISTRATION_VERSION,           //  Version
     0,                                  //  Flags
 
-    NULL,                               //  Context
+    nullptr,                               //  Context
     Callbacks,                          //  Operation callbacks
 
     FSP::FspMonitor::FspmUnload,
@@ -291,9 +291,9 @@ CONST FLT_REGISTRATION FilterRegistration = {
     FSP::FspMonitor::FspmInstanceTeardownStart,
     FSP::FspMonitor::FspmInstanceTeardownComplete,
 
-    NULL,                               //  GenerateFileName
-    NULL,                               //  GenerateDestinationFileName
-    NULL                                //  NormalizeNameComponent
+    nullptr,                               //  GenerateFileName
+    nullptr,                               //  GenerateDestinationFileName
+    nullptr                                //  NormalizeNameComponent
 
 };
 
