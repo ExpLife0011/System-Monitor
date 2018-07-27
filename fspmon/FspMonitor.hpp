@@ -2,6 +2,7 @@
 #define _FSP_MONITOR_HPP_
 
 #include <fltKernel.h>
+#include "FilterRegistrationDefs.hpp"
 
 namespace FSP
 {
@@ -20,6 +21,7 @@ namespace FSP
 
         __declspec(code_seg("PAGE"))
         static
+        _Must_inspect_result_
         _Function_class_(PFLT_FILTER_UNLOAD_CALLBACK)
         _IRQL_requires_max_(APC_LEVEL)
         NTSTATUS
@@ -30,6 +32,7 @@ namespace FSP
 
         __declspec(code_seg("PAGE"))
         static
+        _Must_inspect_result_
         _Function_class_(PFLT_INSTANCE_SETUP_CALLBACK)
         _IRQL_requires_max_(PASSIVE_LEVEL)
         NTSTATUS
@@ -43,6 +46,7 @@ namespace FSP
 
         __declspec(code_seg("PAGE"))
         static
+        _Must_inspect_result_
         _Function_class_(PFLT_INSTANCE_QUERY_TEARDOWN_CALLBACK)
         _IRQL_requires_max_(PASSIVE_LEVEL)
         NTSTATUS
@@ -54,6 +58,7 @@ namespace FSP
 
         __declspec(code_seg("PAGE"))
         static
+        _Function_class_(PFLT_INSTANCE_TEARDOWN_CALLBACK)
         _IRQL_requires_max_(PASSIVE_LEVEL)
         VOID
         FLTAPI
@@ -64,6 +69,7 @@ namespace FSP
 
         __declspec(code_seg("PAGE"))
         static
+        _Function_class_(PFLT_INSTANCE_TEARDOWN_CALLBACK)
         _IRQL_requires_max_(PASSIVE_LEVEL)
         VOID
         FLTAPI
@@ -84,6 +90,7 @@ namespace FSP
         );
 
         __declspec(code_seg("PAGE"))
+         _Must_inspect_result_
         _Function_class_(PFLT_FILTER_UNLOAD_CALLBACK)
         _IRQL_requires_max_(APC_LEVEL)
         NTSTATUS
@@ -93,6 +100,7 @@ namespace FSP
         );
 
         __declspec(code_seg("PAGE"))
+        _Must_inspect_result_
         _Function_class_(PFLT_INSTANCE_SETUP_CALLBACK)
         _IRQL_requires_max_(PASSIVE_LEVEL)
         NTSTATUS
@@ -105,6 +113,7 @@ namespace FSP
         );
 
         __declspec(code_seg("PAGE"))
+        _Must_inspect_result_
         _Function_class_(PFLT_INSTANCE_QUERY_TEARDOWN_CALLBACK)
         _IRQL_requires_max_(PASSIVE_LEVEL)
         NTSTATUS
@@ -115,6 +124,7 @@ namespace FSP
         );
 
         __declspec(code_seg("PAGE"))
+        _Function_class_(PFLT_INSTANCE_TEARDOWN_CALLBACK)
         _IRQL_requires_max_(PASSIVE_LEVEL)
         VOID
         FLTAPI
@@ -124,6 +134,7 @@ namespace FSP
         );
 
         __declspec(code_seg("PAGE"))
+        _Function_class_(PFLT_INSTANCE_TEARDOWN_CALLBACK)
         _IRQL_requires_max_(PASSIVE_LEVEL)
         VOID
         FLTAPI

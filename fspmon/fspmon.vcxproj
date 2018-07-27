@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FilterRegistrationDefs.cpp" />
     <ClCompile Include="FspMonitor.cpp" />
     <ResourceCompile Include="fspmon.rc" />
     <ClCompile Include="fspmon.cpp" />
@@ -76,24 +77,32 @@
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)logs\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <Inf2CatUseLocalTime>true</Inf2CatUseLocalTime>
+    <CodeAnalysisRuleSet>fspmon.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)logs\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <Inf2CatUseLocalTime>true</Inf2CatUseLocalTime>
+    <CodeAnalysisRuleSet>fspmon.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)logs\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <Inf2CatUseLocalTime>true</Inf2CatUseLocalTime>
+    <CodeAnalysisRuleSet>fspmon.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)logs\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <Inf2CatUseLocalTime>true</Inf2CatUseLocalTime>
+    <CodeAnalysisRuleSet>fspmon.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Link>
@@ -103,6 +112,11 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\smlib;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <WppEnabled>true</WppEnabled>
+      <WppPreserveExtensions>.h.hpp.c.cpp</WppPreserveExtensions>
+      <WppScanConfigurationData>$(ProjectDir)fspmon_trace.hpp</WppScanConfigurationData>
+      <WppAdditionalOptions>$(ProjectDir)*.hpp $(ProjectDir)*.h</WppAdditionalOptions>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,6 +127,11 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\smlib;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <WppEnabled>true</WppEnabled>
+      <WppPreserveExtensions>.h.hpp.c.cpp</WppPreserveExtensions>
+      <WppScanConfigurationData>$(ProjectDir)fspmon_trace.hpp</WppScanConfigurationData>
+      <WppAdditionalOptions>$(ProjectDir)*.hpp $(ProjectDir)*.h</WppAdditionalOptions>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,6 +142,11 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\smlib;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <WppEnabled>true</WppEnabled>
+      <WppPreserveExtensions>.h.hpp.c.cpp</WppPreserveExtensions>
+      <WppScanConfigurationData>$(ProjectDir)fspmon_trace.hpp</WppScanConfigurationData>
+      <WppAdditionalOptions>$(ProjectDir)*.hpp $(ProjectDir)*.h</WppAdditionalOptions>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,6 +157,11 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\smlib;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <WppEnabled>true</WppEnabled>
+      <WppPreserveExtensions>.h.hpp.c.cpp</WppPreserveExtensions>
+      <WppScanConfigurationData>$(ProjectDir)fspmon_trace.hpp</WppScanConfigurationData>
+      <WppAdditionalOptions>$(ProjectDir)*.hpp $(ProjectDir)*.h</WppAdditionalOptions>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -144,7 +173,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FilterRegistrationDefs.hpp" />
     <ClInclude Include="FspMonitor.hpp" />
+    <ClInclude Include="fspmon_trace.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fspmon.ruleset" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

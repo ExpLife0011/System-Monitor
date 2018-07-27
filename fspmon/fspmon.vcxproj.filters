@@ -35,10 +35,22 @@
     <ClCompile Include="FspMonitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FilterRegistrationDefs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FspMonitor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fspmon_trace.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterRegistrationDefs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fspmon.ruleset" />
   </ItemGroup>
 </Project>

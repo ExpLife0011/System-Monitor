@@ -3,6 +3,9 @@
 #include "Singleton.hpp"
 #include "FspMonitor.hpp"
 
+#include "fspmon_trace.hpp"
+#include "fspmon.cpp.tmh"
+
 #pragma prefast(disable:__WARNING_ENCODE_MEMBER_FUNCTION_POINTER, "Not valid for kernel mode drivers")
 
 PFLT_FILTER gFilterHandle;
@@ -303,6 +306,12 @@ DriverEntry (
     _In_ PUNICODE_STRING RegistryPath
 )
 {
+    PAGED_CODE();
+
+    WPP_INIT_TRACING(DriverObject, RegistryPath);
+
+    ::InitLogTrace("DriverEntry(0x%p, %wZ)", DriverObject, RegistryPath);
+
     CppInitExitDescriptorsList();
     CppCallStaticConstructors(__crtXca, __crtXcz);
     if (!CppWereAllDestructorsRegistered())
@@ -310,5 +319,8 @@ DriverEntry (
         return STATUS_FLT_NOT_INITIALIZED;
     }
 
-    return FSP::FspMonitor::FspmInitialize(DriverObject, RegistryPath);
+    const auto status = FSP::FspMonitor::FspmInitialize(DriverObject, RegistryPath);
+
+    ::InitLogInfo("Exiting DriverEntry(0x%p, %wZ) with status 0x%x", DriverObject, RegistryPath, status);
+    return status;
 }

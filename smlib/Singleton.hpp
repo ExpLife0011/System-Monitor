@@ -17,7 +17,9 @@ namespace SMLib
 
         template<typename ... Args>
         static
-        Initialize(Args&& ...)
+        Initialize(
+            _In_ Args&& ...
+        )
         {
             Instance().Initialize(static_cast<Args&&>(Args)...);
         }
