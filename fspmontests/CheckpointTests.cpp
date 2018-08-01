@@ -30,7 +30,7 @@ TEST_F(
     ASSERT_TRUE(!NT_SUCCESS(status));
     status = _Checkpoint.SetCheckpoint(FSP::State::uninitializing);
     ASSERT_TRUE(!NT_SUCCESS(status));
-    status = _Checkpoint.SetCheckpoint(FSP::State::uninitialized);
+    status = _Checkpoint.SetCheckpoint(FSP::State::initialized);
     ASSERT_TRUE(!NT_SUCCESS(status));
 
     status = _Checkpoint.SetCheckpoint(FSP::State::initialized);
