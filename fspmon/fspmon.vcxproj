@@ -19,8 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cppmemoryoperators.cpp" />
+    <ClCompile Include="crtsection.cpp" />
     <ClCompile Include="FilterRegistrationDefs.cpp" />
     <ClCompile Include="FspMonitor.cpp" />
+    <ClCompile Include="purecall.cpp" />
+    <ClCompile Include="staticclassessupport.cpp" />
     <ResourceCompile Include="fspmon.rc" />
     <ClCompile Include="fspmon.cpp" />
     <Inf Include="fspmon.inf" />
@@ -137,10 +141,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <AdditionalDependencies>fltmgr.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\smlib;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <WppEnabled>true</WppEnabled>
       <WppPreserveExtensions>.h.hpp.c.cpp</WppPreserveExtensions>
@@ -168,14 +173,14 @@
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\smlib\smlib.vcxproj">
-      <Project>{a92cf6dc-1ab8-4a0f-8d99-9f91739bcec9}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="Checkpoint.hpp" />
+    <ClInclude Include="cppmemoryoperators.h" />
+    <ClInclude Include="crtsection.h" />
     <ClInclude Include="FilterRegistrationDefs.hpp" />
     <ClInclude Include="FspMonitor.hpp" />
     <ClInclude Include="fspmon_trace.hpp" />
+    <ClInclude Include="fltkernelinc.hpp" />
+    <ClInclude Include="staticclassessupport.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fspmon.ruleset" />

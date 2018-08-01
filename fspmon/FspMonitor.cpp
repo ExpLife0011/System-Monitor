@@ -1,5 +1,6 @@
 #include "FspMonitor.hpp"
 #include "Singleton.hpp"
+#include "cppmemoryoperators.h"
 
 #include "fspmon_trace.hpp"
 #include "FspMonitor.cpp.tmh"
@@ -13,7 +14,6 @@ FSP::FspMonitor::FspmInitialize(
 )
 {
     PAGED_CODE();
-
     ::InitLogTrace("FSP::FspMonitor::FspmInitialize(0x%p, %wZ)", DriverObject, RegistryPath);
 
     const auto status = SMLib::Singleton<FSP::FspMonitor>::Instance().Initialize(DriverObject, RegistryPath);
@@ -32,11 +32,11 @@ FSP::FspMonitor::FspmUnload(
 {
     PAGED_CODE();
 
-    ::InitLogTrace("FSP::FspMonitor::FspmUnload(0x%x)", Flags);
+    ::UninitLogTrace("FSP::FspMonitor::FspmUnload(0x%x)", Flags);
 
     const auto status = SMLib::Singleton<FSP::FspMonitor>::Instance().Unload(Flags);
 
-    ::InitLogInfo("Exiting FSP::FspMonitor::FspmUnload(0x%x) with status 0x%x", Flags, status);
+    ::UninitLogInfo("Exiting FSP::FspMonitor::FspmUnload(0x%x) with status 0x%x", Flags, status);
     return status;
 }
 
@@ -53,7 +53,7 @@ FSP::FspMonitor::FspmInstanceSetup(
 {
     PAGED_CODE();
 
-    ::InitLogTrace("FSP::FspMonitor::FspmInstanceSetup(0x%p, 0x%x, 0x%x, 0x%x)", FltObjects, Flags, VolumeDeviceType, VolumeFilesystemType);
+    ::FfLogTrace("FSP::FspMonitor::FspmInstanceSetup(0x%p, 0x%x, 0x%x, 0x%x)", FltObjects, Flags, VolumeDeviceType, VolumeFilesystemType);
 
     const auto status = SMLib::Singleton<FSP::FspMonitor>::Instance().InstanceSetup(
         FltObjects,
@@ -62,7 +62,7 @@ FSP::FspMonitor::FspmInstanceSetup(
         VolumeFilesystemType
     );
 
-    ::InitLogInfo("Exiting FSP::FspMonitor::FspmInstanceSetup(0x%p, 0x%x, 0x%x, 0x%x) with status 0x%x", FltObjects, Flags, VolumeDeviceType, VolumeFilesystemType, status);
+    ::FfLogInfo("Exiting FSP::FspMonitor::FspmInstanceSetup(0x%p, 0x%x, 0x%x, 0x%x) with status 0x%x", FltObjects, Flags, VolumeDeviceType, VolumeFilesystemType, status);
     return status;
 }
 
@@ -76,14 +76,14 @@ FSP::FspMonitor::FspmInstanceQueryTeardown(
 {
     PAGED_CODE();
 
-    ::InitLogTrace("FSP::FspMonitor::FspmInstanceQueryTeardown(0x%p, 0x%x)", FltObjects, Flags);
+    ::FfLogTrace("FSP::FspMonitor::FspmInstanceQueryTeardown(0x%p, 0x%x)", FltObjects, Flags);
 
     const auto status = SMLib::Singleton<FSP::FspMonitor>::Instance().InstanceQueryTeardown(
         FltObjects,
         Flags
     );
 
-    ::InitLogInfo("Exiting FSP::FspMonitor::FspmInstanceQueryTeardown(0x%p, 0x%x) with status 0x%x", FltObjects, Flags, status);
+    ::FfLogInfo("Exiting FSP::FspMonitor::FspmInstanceQueryTeardown(0x%p, 0x%x) with status 0x%x", FltObjects, Flags, status);
     return status;
 }
 
@@ -97,7 +97,7 @@ FSP::FspMonitor::FspmInstanceTeardownStart(
 {
     PAGED_CODE();
 
-    ::InitLogTrace("FSP::FspMonitor::FspmInstanceTeardownStart(0x%p, 0x%x)", FltObjects, Reason);
+    ::FfLogTrace("FSP::FspMonitor::FspmInstanceTeardownStart(0x%p, 0x%x)", FltObjects, Reason);
 
     SMLib::Singleton<FSP::FspMonitor>::Instance().InstanceTeardownStart(
         FltObjects,
@@ -114,7 +114,9 @@ FSP::FspMonitor::FspmInstanceTeardownComplete(
 )
 {
     PAGED_CODE();
-    ::InitLogTrace("FSP::FspMonitor::FspmInstanceTeardownComplete(0x%p, 0x%x)", FltObjects, Reason);
+
+    ::FfLogTrace("FSP::FspMonitor::FspmInstanceTeardownComplete(0x%p, 0x%x)", FltObjects, Reason);
+
     SMLib::Singleton<FSP::FspMonitor>::Instance().InstanceTeardownComplete(
         FltObjects,
         Reason
@@ -133,6 +135,7 @@ FSP::FspMonitor::Initialize(
 
     ::InitLogTrace("FSP::FspMonitor::Initialize(0x%p, 0x%p, %wZ)", this, DriverObject, RegistryPath);
 
+    ::InitLogTrace("::FltRegisterFilter(0x%p, 0x%p, 0x%p)", DriverObject, &FSP::gFilterRegistration, &_Filter);
     auto status = ::FltRegisterFilter(
         DriverObject,
         &FSP::gFilterRegistration,
@@ -140,6 +143,7 @@ FSP::FspMonitor::Initialize(
     );
     if (!NT_SUCCESS(status))
     {
+        ::InitLogCritical("::FltRegisterFilter(0x%p, 0x%p, 0x%p) failed with status 0x%x", DriverObject, &FSP::gFilterRegistration, &_Filter, status);
         return status;
     }
 
@@ -156,7 +160,7 @@ FSP::FspMonitor::Unload(
 {
     PAGED_CODE();
 
-    ::InitLogTrace("FSP::FspMonitor::Unload(0x%p, 0x%x)", this, Flags);
+    ::UninitLogTrace("FSP::FspMonitor::Unload(0x%p, 0x%x)", this, Flags);
 
     ::UninitLogTrace("::FltUnregisterFilter(0x%p, 0x%p)", this, _Filter);
     ::FltUnregisterFilter(_Filter);
@@ -177,7 +181,7 @@ FSP::FspMonitor::InstanceSetup(
 {
     PAGED_CODE();
 
-    ::InitLogTrace("FSP::FspMonitor::InstanceSetup(0x%p, 0x%p, 0x%x, 0x%x, 0x%x)", this, FltObjects, Flags, VolumeDeviceType, VolumeFilesystemType);
+    ::FfLogTrace("FSP::FspMonitor::InstanceSetup(0x%p, 0x%p, 0x%x, 0x%x, 0x%x)", this, FltObjects, Flags, VolumeDeviceType, VolumeFilesystemType);
 
     return STATUS_SUCCESS;
 }
@@ -191,7 +195,8 @@ FSP::FspMonitor::InstanceQueryTeardown(
 )
 {
     PAGED_CODE();
-    ::InitLogTrace("FSP::FspMonitor::InstanceQueryTeardown(0x%p, 0x%p, 0x%x)", this, FltObjects, Flags);
+
+    ::FfLogTrace("FSP::FspMonitor::InstanceQueryTeardown(0x%p, 0x%p, 0x%x)", this, FltObjects, Flags);
 
     return STATUS_SUCCESS;
 }
@@ -204,9 +209,9 @@ FSP::FspMonitor::InstanceTeardownStart(
     _In_ FLT_INSTANCE_TEARDOWN_FLAGS Reason
 )
 {
-    ::InitLogTrace("FSP::FspMonitor::InstanceTeardownStart(0x%p, 0x%p, 0x%x)", this, FltObjects, Reason);
-
     PAGED_CODE();
+ 
+    ::FfLogTrace("FSP::FspMonitor::InstanceTeardownStart(0x%p, 0x%p, 0x%x)", this, FltObjects, Reason);
 }
 
 _Use_decl_annotations_
@@ -217,7 +222,7 @@ FSP::FspMonitor::InstanceTeardownComplete(
     _In_ FLT_INSTANCE_TEARDOWN_FLAGS Reason
 )
 {
-    ::InitLogTrace("FSP::FspMonitor::InstanceTeardownComplete(0x%p, 0x%p, 0x%x)", this, FltObjects, Reason);
-
     PAGED_CODE();
+
+    ::FfLogTrace("FSP::FspMonitor::InstanceTeardownComplete(0x%p, 0x%p, 0x%x)", this, FltObjects, Reason);
 }

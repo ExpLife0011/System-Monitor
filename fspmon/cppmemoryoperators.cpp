@@ -1,3 +1,4 @@
+#ifndef TESTS
 #include <fltKernel.h>
 
 #define CPP_GLOBAL_NEW_OPERATOR_TAG 'MPC!'
@@ -119,3 +120,5 @@ operator delete(
     UNREFERENCED_PARAMETER(Size);
     ::operator delete(Address, Tag);
 }
+
+#endif // TESTS

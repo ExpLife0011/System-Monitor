@@ -17,6 +17,9 @@
       <UniqueIdentifier>{8E41214B-6785-4CFE-B992-037D68949A14}</UniqueIdentifier>
       <Extensions>inf;inv;inx;mof;mc;</Extensions>
     </Filter>
+    <Filter Include="CPP Support">
+      <UniqueIdentifier>{5298b65a-4c4b-4783-8764-92d99aa97755}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Inf Include="fspmon.inf">
@@ -38,6 +41,18 @@
     <ClCompile Include="FilterRegistrationDefs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cppmemoryoperators.cpp">
+      <Filter>CPP Support</Filter>
+    </ClCompile>
+    <ClCompile Include="crtsection.cpp">
+      <Filter>CPP Support</Filter>
+    </ClCompile>
+    <ClCompile Include="purecall.cpp">
+      <Filter>CPP Support</Filter>
+    </ClCompile>
+    <ClCompile Include="staticclassessupport.cpp">
+      <Filter>CPP Support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FspMonitor.hpp">
@@ -48,6 +63,21 @@
     </ClInclude>
     <ClInclude Include="FilterRegistrationDefs.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fltkernelinc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Checkpoint.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cppmemoryoperators.h">
+      <Filter>CPP Support</Filter>
+    </ClInclude>
+    <ClInclude Include="crtsection.h">
+      <Filter>CPP Support</Filter>
+    </ClInclude>
+    <ClInclude Include="staticclassessupport.h">
+      <Filter>CPP Support</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

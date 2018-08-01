@@ -1,7 +1,7 @@
 #ifndef _FSP_MONITOR_HPP_
 #define _FSP_MONITOR_HPP_
 
-#include <fltKernel.h>
+#include "fltkernelinc.hpp"
 #include "FilterRegistrationDefs.hpp"
 
 namespace FSP

@@ -1,5 +1,7 @@
 #ifndef _STATIC_CLASSES_SUPPORT_H_
 #define _STATIC_CLASSES_SUPPORT_H_
+#ifndef TESTS
+
 
 #include <fltKernel.h>
 #include "crtsection.h"
@@ -20,6 +22,6 @@ void
 __cdecl
 CppExit();
 
-
+#endif // TESTS
 #endif // _STATIC_CLASSES_SUPPORT_H_
 

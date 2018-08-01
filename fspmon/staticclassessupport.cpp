@@ -1,3 +1,5 @@
+#ifndef TESTS
+
 #include <fltKernel.h>
 #include "crtsection.h"
 
@@ -108,3 +110,5 @@ atexit(
 {
     return (!CppRegisterDestructor(Function)) ? -1 : 0;
 }
+
+#endif // TESTS

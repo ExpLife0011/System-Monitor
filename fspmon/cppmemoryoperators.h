@@ -1,5 +1,6 @@
 #ifndef _CPPMEMORYOPERATORS_H_
 #define _CPPMEMORYOPERATORS_H_
+#ifndef TESTS
 
 #include <fltKernel.h>
 
@@ -40,5 +41,7 @@ operator delete(
     _In_ size_t Size,
     _In_ _Const_ const ULONG Tag
     );
+
+#endif // TESTS
 #endif // !_CPPMEMORYOPERATORS_H_
 

@@ -1,5 +1,7 @@
 #ifndef _CRT_SECTION_H_
 #define _CRT_SECTION_H_
+#ifndef TESTS
+
 
 typedef void(__cdecl *PVFV)(void);
 
@@ -17,5 +19,6 @@ extern "C" {
     PVFV __crtXtz[];
 }
 
+#endif // TESTS
 #endif // _CRT_SECTION_H_
 
