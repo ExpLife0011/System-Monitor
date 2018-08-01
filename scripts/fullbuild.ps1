@@ -17,6 +17,7 @@ function Build(
         return;
     }
 }
+$ErrorActionPreference = "Stop"
 $sln = Join-Path (git rev-parse --show-toplevel) "System-Monitor.sln";
 Build -Configuration Debug -Platform x64 -Solution $sln
 Build -Configuration Debug -Platform x86 -Solution $sln
