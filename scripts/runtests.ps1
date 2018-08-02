@@ -1,6 +1,6 @@
 $Env:COMPUTERNAME
 function Get-IsAppveyor(){
-    return ($Env:COMPUTERNAME -match "appveyor")
+    return ($Env:COMPUTERNAME -match "APPVYR-WIN")
 }
 function Write-LogMessage(
     [Parameter(Mandatory=$true)]
